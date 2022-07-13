@@ -45,17 +45,41 @@ function admin {
     Start-Process -WindowStyle hidden powershell -Verb runAs
 }
 
+function kp {
+    Stop-Process -Name "Teams"
+    Stop-Process -Name "Outlook"
+}
+
 ## Check git status for repo. 
 function status {
     git status
 }
 
+function add {
+    git add .
+}
+
+function commit($msg) {
+    
+    git commit -m "$($msg)"
+}
+
+function push {
+    git push
+}
+
 ## Reload Profile script.
 function reload {
-    Invoke-Command $profile
+    $pwd = Get-Location
+    cd $PSHOME
+    Invoke-Expression .\profile.ps1
+    cd $pwd
 }
 
 ## Copy C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1 to git repo.
 function Copy-Profile {
-    Invoke-Command -RunAsAdministrator Copy-Item -Path "C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1" -Destination "$($HOME)\code\git\powershell-scripts\profile.ps1"
-}
+    $pwd = Get-Location
+    cd $PSHOME
+    Copy-Item "Profile.ps1" -Destination "$($HOME)\code\git\powershell-scripts\profile.ps1"
+    cd $pwd
+} 
