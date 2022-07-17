@@ -29,9 +29,7 @@ function prompt {
     $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
     $principal = [Security.Principal.WindowsPrincipal] $identity
     $adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
-
     $time = Get-Date -Format "HH:mm:ss"
-
 
     $(if ($principal.IsInRole($adminRole)) { 
             "[ADMIN][$env:COMPUTERNAME] $($time)  $(Get-Location) > "
