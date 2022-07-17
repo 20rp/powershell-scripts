@@ -19,7 +19,6 @@ function Get-CmdletAlias ($cmdletname) {
 function Color-Console {
     $Host.ui.rawui.backgroundcolor = "black"
     $Host.ui.rawui.foregroundcolor = "cyan"
-    $hosttime = (Get-ChildItem -Path $PSHOME\PowerShell.exe).CreationTime
     $hostversion="$($Host.Version.Major)`.$($Host.Version.Minor)"
     $Host.UI.RawUI.WindowTitle = "PowerShell $hostversion"
     Clear-Host
@@ -32,6 +31,7 @@ function prompt {
     $adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
 
     $time = Get-Date -Format "HH:mm:ss"
+
 
     $(if ($principal.IsInRole($adminRole)) { 
             "[ADMIN][$env:COMPUTERNAME] $($time)  $(Get-Location) > "
