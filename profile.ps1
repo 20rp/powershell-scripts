@@ -17,14 +17,33 @@ function Get-CmdletAlias ($cmdletname) {
 
 # Customize Console.
 function Color-Console {
-    $Host.ui.rawui.backgroundcolor = 8
-    $Host.ui.rawui.foregroundcolor = 13
+    $Host.ui.rawui.backgroundcolor = "black"
+    $Host.ui.rawui.foregroundcolor = "cyan"
     $hosttime = (Get-ChildItem -Path $PSHOME\PowerShell.exe).CreationTime
     $hostversion="$($Host.Version.Major)`.$($Host.Version.Minor)"
-    $Host.UI.RawUI.WindowTitle = "PowerShell $hostversion ($hosttime)"
+    $Host.UI.RawUI.WindowTitle = "PowerShell $hostversion"
     Clear-Host
 }
 
+# Customize the prompt for the console.
+function prompt {
+    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = [Security.Principal.WindowsPrincipal] $identity
+    $adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
+
+    $time = Get-Date -Format "HH:mm:ss"
+
+    $(if ($principal.IsInRole($adminRole)) { 
+            "[ADMIN][$env:COMPUTERNAME] $($time)  $(Get-Location) > "
+        }
+        else 
+        { 
+            "[$env:COMPUTERNAME] $($time) $(Get-Location) > " 
+        }
+    )
+}
+
+prompt
 Color-Console
   
 function hosts {
@@ -68,7 +87,7 @@ function push {
     git push
 }
 
-## Reload Profile script.
+## Reload Profile script. Not working currently
 function reload {
     $pwd = Get-Location
     cd $PSHOME
@@ -79,7 +98,9 @@ function reload {
 ## Copy C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1 to git repo.
 function Copy-Profile {
     $pwd = Get-Location
+    $code = "$($HOME)\code\git\powershell-scripts\"
+
     cd $PSHOME
-    Copy-Item "Profile.ps1" -Destination "$($HOME)\code\git\powershell-scripts\profile.ps1"
-    cd $pwd
+    Copy-Item "Profile.ps1" -Destination "$($HOME)\code\git\powershell-scripts\profile.ps1" -Force
+    cd $code
 } 
