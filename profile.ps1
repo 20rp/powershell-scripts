@@ -56,17 +56,12 @@ function Start-Script {
     Start-Process "C:\Program Files (x86)\Deluge\deluge.exe"
 }
 
-function sm {
-    Stop-Process -Name "Messenger"
-}
-
 function admin {
     Start-Process -WindowStyle hidden powershell -Verb runAs
 }
 
-function kp {
-    Stop-Process -Name "Teams"
-    Stop-Process -Name "Outlook"
+function k ($process) {
+    Stop-Process -Name $process
 }
 
 ## Check git status for repo. 
