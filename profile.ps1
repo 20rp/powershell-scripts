@@ -82,12 +82,29 @@ function push {
     git push
 }
 
+function pull {
+    git pull
+}
+
+function sudo ($process) {
+    Invoke-Expression $process -Verb runAs
+}
+
+# function mount-me {
+    
+# }
+
 ## Reload Profile script. Not working currently
 function reload {
     $pwd = Get-Location
     cd $PSHOME
     Invoke-Expression .\profile.ps1
     cd $pwd
+}
+
+function Map-Profile {
+    
+    Start-Process PowerShell.exe -ArgumentList "Copy-Item 'profile.ps1' -Destination '$($PSHOME)\profile.ps1'"  -verb runAs
 }
 
 ## Copy C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1 to git repo.
