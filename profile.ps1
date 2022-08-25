@@ -74,7 +74,6 @@ function add {
 }
 
 function commit($msg) {
-    
     git commit -m "$($msg)"
 }
 
@@ -103,7 +102,6 @@ function reload {
 }
 
 function Map-Profile {
-    
     Start-Process PowerShell.exe -ArgumentList "Copy-Item 'profile.ps1' -Destination '$($PSHOME)\profile.ps1'"  -verb runAs
 }
 
