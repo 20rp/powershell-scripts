@@ -16,13 +16,13 @@ function Get-CmdletAlias ($cmdletname) {
 }
 
 # Customize Console.
-function Color-Console {
-    $Host.ui.rawui.backgroundcolor = "black"
-    $Host.ui.rawui.foregroundcolor = "cyan"
-    $hostversion="$($Host.Version.Major)`.$($Host.Version.Minor)"
-    $Host.UI.RawUI.WindowTitle = "PowerShell $hostversion"
-    Clear-Host
-}
+# function Color-Console {
+#     $Host.ui.rawui.backgroundcolor = "black"
+#     $Host.ui.rawui.foregroundcolor = "cyan"
+#     $hostversion="$($Host.Version.Major)`.$($Host.Version.Minor)"
+#     $Host.UI.RawUI.WindowTitle = "PowerShell $hostversion"
+#     Clear-Host
+# }
 
 # Customize the prompt for the console.
 function prompt {
@@ -52,8 +52,6 @@ function hosts {
 
 function Start-Script {
     Start-Process -FilePath "Spotify"
-    Start-Process "C:\Program Files\Mozilla Firefox\firefox.exe"
-    Start-Process "C:\Program Files (x86)\Deluge\deluge.exe"
 }
 
 function admin {
@@ -101,7 +99,7 @@ function reload {
     cd $pwd
 }
 
-function Map-Profile {
+function Map-profile {
     Start-Process PowerShell.exe -ArgumentList "Copy-Item 'profile.ps1' -Destination '$($PSHOME)\profile.ps1'"  -verb runAs
 }
 
@@ -114,3 +112,11 @@ function Copy-Profile {
     Copy-Item "Profile.ps1" -Destination "$($HOME)\code\git\powershell-scripts\profile.ps1" -Force
     cd $code
 } 
+
+function Update-PowerShell {
+    winget install --id Microsoft.Powershell --source winget
+}
+
+function psv {
+    PSVersionTable.PSVersion
+}
