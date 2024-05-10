@@ -44,7 +44,6 @@ function prompt {
 }
 
 prompt
-Color-Console
   
 function hosts {
     Start-Process "C:/Windows/System32/Drivers/etc"
@@ -118,5 +117,5 @@ function Update-PowerShell {
 }
 
 function psv {
-    PSVersionTable.PSVersion
+    $PSVersionTable.PSVersion
 }
